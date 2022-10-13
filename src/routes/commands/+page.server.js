@@ -16,14 +16,14 @@ const supabase = createClient(
 
 export const load = async () => {
     console.log('Server Load Ran')
-    // const fetchDataFromSupabase = async () => {
-    //     const res = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.TMDB_API_KEY}`)
+    // const fetchData = async () => {
+    //     const res = await fetch(``)
     //     const data = await res.json()
     //     return data.results
     // }
 
     return {
-        // movies: fetchDataFromSupabase(),
+        // resolved: fetchData(),
         commands: getCommands()
     }
 }
