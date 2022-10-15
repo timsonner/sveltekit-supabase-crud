@@ -5,7 +5,6 @@ import { createClient } from '@supabase/supabase-js'
 // const { createClient } = require('@supabase/supabase-js')
 // const path = require('path')
 // const { v4: uuidv4 } = require('uuid')
-import uuidv4 from 'uuid'
 // const { spawn } = require('child_process')
 
 // create Supabase client, pass it the .env variables
@@ -16,11 +15,7 @@ const supabase = createClient(
 
 export const load = async () => {
     console.log('Server Load Ran')
-    // const fetchData = async () => {
-    //     const res = await fetch(``)
-    //     const data = await res.json()
-    //     return data.results
-    // }
+    
 
     return {
         // resolved: fetchData(),
@@ -28,23 +23,38 @@ export const load = async () => {
     }
 }
 
+export const fetchData = async () => {
+        const res = await fetch(`/api`)
+        const data = await res.json()
+        return data.results
+    }
+
 export const getCommands = async () => {
-  
   const { data, error } = await supabase
         .from('commands')
         .select('*')
     console.log(data)
     return data     
 }
+export const POST = async ({ request }) => {
+  const body = await request.json()
+  // const authHeader = request.headers.get('Authorization')
+  // if (authHeader !== 'Myauthheader') {
+  //   return new Response(JSON.stringify({message: 'Invalid credentials'}), { status: 401 })
+  // }
+  const insertCommand = async (req, res) => {
+      const { command } = req.body
+      
+        const { data, error } = await supabase
+          .from('commands')
+          .insert([{ id: uuidv4(), command: command }])
+          return data
+    }
+  console.log(body)
 
-export const insertCommand = async (req, res) => {
-  const { command } = req.body
-  
-    const { data, error } = await supabase
-      .from('commands')
-      .insert([{ id: uuidv4(), command: command }])
-      return data
+  return new Response(JSON.stringify(insertCommand()), { status: 201 })
 }
+
 
 
 
