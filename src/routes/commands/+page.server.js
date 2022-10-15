@@ -15,19 +15,17 @@ const supabase = createClient(
 
 export const load = async () => {
     console.log('Server Load Ran')
-    
-
     return {
         // resolved: fetchData(),
         commands: getCommands()
     }
 }
 
-export const fetchData = async () => {
-        const res = await fetch(`/api`)
-        const data = await res.json()
-        return data.results
-    }
+// export const fetchData = async () => {
+//         const res = await fetch(`/api`)
+//         const data = await res.json()
+//         return data.results
+//     }
 
 export const getCommands = async () => {
   const { data, error } = await supabase
@@ -36,6 +34,7 @@ export const getCommands = async () => {
     console.log(data)
     return data     
 }
+
 export const POST = async ({ request }) => {
   const body = await request.json()
   // const authHeader = request.headers.get('Authorization')

@@ -13,7 +13,6 @@ export const PUT = async ({ request, params }) => {
     return new Response(JSON.stringify({message: "Success"}), { status: 201 })
 }
 
-
 export const DELETE = async ({ params }) => {
     console.log(params)
     // const {id} = params
@@ -21,8 +20,8 @@ export const DELETE = async ({ params }) => {
         const { data, error } = await supabase
       .from('commands')
       .delete()
-          .match({ id: params.id })
-        return data
+      .match({ id: params.id })
+      return data
     }
     deleteCommand()
     return new Response(JSON.stringify({message: "Success"}), { status: 201 })

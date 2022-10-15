@@ -11,3 +11,4 @@ export function GET(event) {
     userAgent: event.request.headers.get('user-agent')
   });
 }
+
