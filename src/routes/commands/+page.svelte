@@ -28,4 +28,13 @@ export const doPost = async () => {
       }
     })
   }
+  export const insertPosts = async () => {
+    const response = await fetch('/api', {
+      method: 'PUT',
+      body: JSON.stringify({ command: command, id: id}),
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+  }
 </script>

@@ -1,28 +1,27 @@
-export const PUT = async ({ request }) => {
-    const body = await request.json()
+export const PUT = async ({ request, params }) => {
+  const body = await request.json()
     console.log(body)
-    const insertCommand = async () => {
-        const { command, id } = body     
+    const updateCommand = async () => {
+        const { command } = body     
           const { data, error } = await supabase
             .from('commands')
-            .insert([{ id: id, command: command }])
+            .update({ command: command })
+            .match({ id: params.id })
             return data
     }
-    insertCommand()
+    updateCommand()
     return new Response(JSON.stringify({message: "Success"}), { status: 201 })
 }
 
 
 export const DELETE = async ({ params }) => {
-    const params = await params
     console.log(params)
-    const {id} = params
-
+    // const {id} = params
     const deleteCommand = async () => {
         const { data, error } = await supabase
       .from('commands')
       .delete()
-          .match({ id: id })
+          .match({ id: params.id })
         return data
     }
     deleteCommand()
