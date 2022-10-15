@@ -39,3 +39,4 @@ export const POST = async ({ request }) => {
   insertCommand()
   return new Response(JSON.stringify({message: "Success"}), { status: 201 })
 }
+
