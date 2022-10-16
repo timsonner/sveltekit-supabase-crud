@@ -8,5 +8,6 @@
 <main>
     <body>
         <h1>SvelteKit/Supabase CRUD, API fetch, Headers, and maybe...0Auth</h1>
+        <p>Built with <a href="https://kit.svelte.dev">SvelteKit</a> and <a href="https://app.supabase.com">Supabase</a></p>
     </body>
 </main>

@@ -3,11 +3,6 @@
   export let data
 	const { commands } = data;
   export let inputInsertCommandValue = ''
-  // export let foo = commands
-  // export let output
-  const triggerUpdate = async () => {
-
-  }
 
   export const readCommands = async () => {
       const response = await fetch('/api', {
@@ -61,7 +56,6 @@
         }
       })
     }
-  
 
   </script>
 <!-- {output} -->
@@ -71,8 +65,6 @@
     Run system commands on the server
   </h1>  
   </header>
-
-<p>Built with <a href="https://kit.svelte.dev">SvelteKit</a></p>
 
 <button on:click={readCommands}>Click to get posts</button>
 <input type="text" bind:value={inputInsertCommandValue} placeholder="Enter a command">

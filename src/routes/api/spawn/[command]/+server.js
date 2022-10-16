@@ -1,6 +1,6 @@
-import {spawn} from 'child_process'
-export const POST = async ({ request }) => {
+import { spawn } from 'child_process'
 
+export const POST = async ({ request }) => {
     const body = await request.json()
     // const authHeader = request.headers.get('Authorization')
     // if (authHeader !== 'Myauthheader') {
@@ -29,9 +29,9 @@ export const POST = async ({ request }) => {
                   })
               }
         makeSystemCall(command)
-        console.log(output)
+        console.log(`POST: spawnCommand(): ${output}`)
         return output
     }
-    spawnCommand()
-    return new Response(JSON.stringify({message: "Success"}), { status: 201 })
+    const data = spawnCommand()
+    return new Response(JSON.stringify({message: data}), { status: 201 })
 }
