@@ -38,12 +38,12 @@
       })
     }
   
-    export const deleteCommand = async () => {
-      const id = uuidv4()
-      const command = 'imacommand2' // This is static for testing, needs bound to a variable
+    export const deleteCommand = async (id) => {
+      // const id = uuidv4()
+      // const command = 'imacommand2' // This is static for testing, needs bound to a variable
       const response = await fetch(`/api/${id}`, { // same, static testing
         method: 'DELETE',
-        body: JSON.stringify({ command: command, id: id}),
+        body: JSON.stringify({ id: id}),
         headers: {
           'content-type': 'application/json'
         }
@@ -64,6 +64,6 @@
   <p>{command.command}</p>
   <input type="text" placeholder="" bind:value={command.command}>
   <button on:click={updateCommand(command.id, command.command)}>Edit</button>
-  <button>Delete</button>
+  <button on:click={deleteCommand(command.id)}>Delete</button>
 
 {/each}
