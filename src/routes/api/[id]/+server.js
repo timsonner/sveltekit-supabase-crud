@@ -1,7 +1,16 @@
+import 'dotenv/config'
+import { createClient } from '@supabase/supabase-js'
+
+// create Supabase client, pass it the .env variables
+const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  )
+
 export const PUT = async ({ request, params }) => {
   const body = await request.json()
     console.log(body)
-    const updateCommand = async () => {
+    const putCommand = async () => {
         const { command } = body     
           const { data, error } = await supabase
             .from('commands')
@@ -9,7 +18,7 @@ export const PUT = async ({ request, params }) => {
             .match({ id: params.id })
             return data
     }
-    updateCommand()
+    putCommand()
     return new Response(JSON.stringify({message: "Success"}), { status: 201 })
 }
 

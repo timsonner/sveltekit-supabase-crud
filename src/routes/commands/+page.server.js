@@ -41,7 +41,7 @@ export const POST = async ({ request }) => {
   // if (authHeader !== 'Myauthheader') {
   //   return new Response(JSON.stringify({message: 'Invalid credentials'}), { status: 401 })
   // }
-  const insertCommand = async (req, res) => {
+  const postCommand = async (req, res) => {
       const { command } = req.body
       
         const { data, error } = await supabase
@@ -51,7 +51,7 @@ export const POST = async ({ request }) => {
     }
   console.log(body)
 
-  return new Response(JSON.stringify(insertCommand()), { status: 201 })
+  return new Response(JSON.stringify(postCommand()), { status: 201 })
 }
 
 
