@@ -1,9 +1,13 @@
 <script>
   import { v4 as uuidv4 } from 'uuid'
-  export let data;
+  export let data
 	const { commands } = data;
-  // export let inputEdit = ''
   export let inputInsertCommandValue = ''
+  // export let foo = commands
+  // export let output
+  const triggerUpdate = async () => {
+
+  }
 
   export const readCommands = async () => {
       const response = await fetch('/api', {
@@ -25,11 +29,10 @@
         }
       })
     }
+
     export const updateCommand = async (id, command) => {
-      // const id = uuidv4()
-      // const command = inputEdit.valueOf()
       console.log(`command:${command} id: ${id}`)
-      const response = await fetch(`/api/${id}`, { // same, static testing
+      const response = await fetch(`/api/${id}`, { 
         method: 'PUT',
         body: JSON.stringify({ command: command }),
         headers: {
@@ -39,9 +42,7 @@
     }
   
     export const deleteCommand = async (id) => {
-      // const id = uuidv4()
-      // const command = 'imacommand2' // This is static for testing, needs bound to a variable
-      const response = await fetch(`/api/${id}`, { // same, static testing
+      const response = await fetch(`/api/${id}`, { 
         method: 'DELETE',
         body: JSON.stringify({ id: id}),
         headers: {
@@ -50,20 +51,42 @@
       })
     }
 
-  </script>
+    export const spawnCommand = async (command) => {
+      const id = uuidv4()
+      const response = await fetch(`/api/spawn/${command}`, { 
+        method: 'POST',
+        body: JSON.stringify({ command: command }),
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+    }
+  
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+  </script>
+<!-- {output} -->
+  <!-- HTML Start -->
+  <header>  
+  <h1>
+    Run system commands on the server
+  </h1>  
+  </header>
+
+<p>Built with <a href="https://kit.svelte.dev">SvelteKit</a></p>
 
 <button on:click={readCommands}>Click to get posts</button>
 <input type="text" bind:value={inputInsertCommandValue} placeholder="Enter a command">
 <button on:click={createCommand}>Add</button>
 
 {#each commands as command}
-
   <p>{command.command}</p>
   <input type="text" placeholder="" bind:value={command.command}>
   <button on:click={updateCommand(command.id, command.command)}>Edit</button>
   <button on:click={deleteCommand(command.id)}>Delete</button>
-
+  <button on:click={spawnCommand(command.command)}>Execute</button>
 {/each}
+
+<br>
+<footer>
+  2022 Tim Sonner
+</footer>

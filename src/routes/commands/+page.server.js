@@ -2,6 +2,7 @@ import 'dotenv/config'
 
 // require('dotenv').config()
 import { createClient } from '@supabase/supabase-js'
+import { invalidateAll } from '$app/navigation'
 // const { createClient } = require('@supabase/supabase-js')
 // const path = require('path')
 // const { v4: uuidv4 } = require('uuid')
@@ -48,9 +49,8 @@ export const POST = async ({ request }) => {
           .from('commands')
           .insert([{ id: uuidv4(), command: command }])
           return data
-    }
+  }
   console.log(body)
-
   return new Response(JSON.stringify(postCommand()), { status: 201 })
 }
 
