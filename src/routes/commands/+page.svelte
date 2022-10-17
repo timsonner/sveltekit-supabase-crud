@@ -46,6 +46,7 @@
       })
     }
 
+export let spawnOutput = ''
     export const spawnCommand = async (command) => {
       const id = uuidv4()
       const response = await fetch(`/api/spawn/${command}`, { 
@@ -55,8 +56,11 @@
           'content-type': 'application/json'
         }
       })
+      spawnOutput = await response.json()
+      const {message} = spawnOutput
+      console.log(spawnOutput)
     }
-
+    // 🟢 🔴
   </script>
 <!-- {output} -->
   <!-- HTML Start -->
@@ -65,7 +69,7 @@
     Run system commands on the server
   </h1>  
   </header>
-
+{spawnOutput}
 <button on:click={readCommands}>Click to get posts</button>
 <input type="text" bind:value={inputInsertCommandValue} placeholder="Enter a command">
 <button on:click={createCommand}>Add</button>
