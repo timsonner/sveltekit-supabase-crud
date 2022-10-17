@@ -48,7 +48,7 @@
 
 export let spawnOutput = ''
     export const spawnCommand = async (command) => {
-      const id = uuidv4()
+      // const id = uuidv4()
       const response = await fetch(`/api/spawn/${command}`, { 
         method: 'POST',
         body: JSON.stringify({ command: command }),
