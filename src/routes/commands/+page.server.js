@@ -11,16 +11,9 @@ const supabase = createClient(
 export const load = async () => {
     console.log('Server Load Ran')
     return {
-        // resolved: fetchData(),
         commands: getCommands()
     }
 }
-
-// export const fetchData = async () => {
-//         const res = await fetch(`/api`)
-//         const data = await res.json()
-//         return data.results
-//     }
 
 export const getCommands = async () => {
   const { data, error } = await supabase

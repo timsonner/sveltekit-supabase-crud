@@ -15,7 +15,7 @@ export const GET = async ({ request, url }) => {
     const { data, error } = await supabase
           .from('commands')
           .select('*')
-      console.log(data)
+      console.log(`/api/spawn: ${data}`)
       return data     
   }
   // return new Response(JSON.stringify(data), { status: 200 })

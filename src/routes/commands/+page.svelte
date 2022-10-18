@@ -1,10 +1,25 @@
 <script>
   import { v4 as uuidv4 } from 'uuid'
+  import {
+  afterNavigate,
+  beforeNavigate,
+  disableScrollHandling,
+  goto,
+  invalidate,
+  invalidateAll,
+  prefetch,
+  prefetchRoutes
+} from '$app/navigation';
 
   export let data
   export let inputInsertCommandValue = ''
 
 	let { commands } = data;
+
+export const reload = async () => {
+  invalidate('/commands')
+  commands = [...commands]
+}
 
   export const readCommands = async () => {
       const response = await fetch('/api', {
@@ -13,12 +28,6 @@
           'content-type': 'application/json'
         }
       })
-
-      console.log(response.body)
-      return {
-        // resolved: fetchData(),
-        response
-    }
     }
   
   export const createCommand = async () => {
@@ -31,9 +40,6 @@
           'content-type': 'application/json'
         }
       })
-//       const result = await readCommands()
-//       const {messages} = result
-// console.log(result.data)
     }
 
     export const updateCommand = async (id, command) => {
@@ -59,7 +65,6 @@
 
 export let spawnOutput = ''
     export const spawnCommand = async (command) => {
-      // const id = uuidv4()
       const response = await fetch(`/api/spawn/${command}`, { 
         method: 'POST',
         body: JSON.stringify({ command: command }),
@@ -80,14 +85,14 @@ export let spawnOutput = ''
   </h1>  
   </header>
 {spawnOutput}
-<button on:click={readCommands}>Click to get posts</button>
+<button on:click={reload}>Click to get commands</button>
 <input type="text" bind:value={inputInsertCommandValue} placeholder="Enter a command">
 <button on:click={createCommand}>Add</button>
 
 {#each commands as command}
   <p>{command.command}</p>
   <input type="text" placeholder="" bind:value={command.command}>
-  <button on:click={updateCommand(command.id, command.command)}>Edit</button>
+  <button sveltekit:reload on:click={updateCommand(command.id, command.command)}>Edit</button>
   <button on:click={deleteCommand(command.id)}>Delete</button>
   <button on:click={spawnCommand(command.command)}>Execute</button>
 {/each}
