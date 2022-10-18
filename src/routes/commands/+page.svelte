@@ -1,8 +1,10 @@
 <script>
   import { v4 as uuidv4 } from 'uuid'
+
   export let data
-	const { commands } = data;
   export let inputInsertCommandValue = ''
+
+	let { commands } = data;
 
   export const readCommands = async () => {
       const response = await fetch('/api', {
@@ -11,6 +13,12 @@
           'content-type': 'application/json'
         }
       })
+
+      console.log(response.body)
+      return {
+        // resolved: fetchData(),
+        response
+    }
     }
   
   export const createCommand = async () => {
@@ -23,6 +31,9 @@
           'content-type': 'application/json'
         }
       })
+//       const result = await readCommands()
+//       const {messages} = result
+// console.log(result.data)
     }
 
     export const updateCommand = async (id, command) => {
@@ -57,12 +68,11 @@ export let spawnOutput = ''
         }
       })
       spawnOutput = await response.json()
-      const {message} = spawnOutput
       console.log(spawnOutput)
     }
     // 🟢 🔴
   </script>
-<!-- {output} -->
+
   <!-- HTML Start -->
   <header>  
   <h1>
